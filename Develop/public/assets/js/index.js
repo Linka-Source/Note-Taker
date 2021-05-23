@@ -121,11 +121,18 @@ const renderNoteList = async (notes) => {
   }
 
   notes.forEach((note) => {
-    const $li = create$li(note
+    const $li = create$li(note.title).data(note);
+    noteListItems.push($li);
+  });
+
+  $noteList.append(noteListItems);
+};
 
 
 // // Gets notes from the db and renders them to the sidebar
-// const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderNotes = () => {
+  return getNotes().then(renderNoteList);
+};
 
 // if (window.location.pathname === '/notes') {
 //   saveNoteBtn.addEventListener('click', handleNoteSave);

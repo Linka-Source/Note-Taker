@@ -1,0 +1,24 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "An app to take notes",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Linka-Source/Note-Taker.git"
+  },
+  "author": "PK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Linka-Source/Note-Taker/issues"
+  },
+  "homepage": "https://github.com/Linka-Source/Note-Taker#readme"
+}

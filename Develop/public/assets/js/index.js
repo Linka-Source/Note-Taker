@@ -95,16 +95,13 @@ const handleNewNoteView = (e) => {
   } else {
     $saveNoteBtn.show();
   }
+};
 
+const renderNoteList = async (notes) => {
+  $noteList.empty();
 
-// // Render the list of note titles
-// const renderNoteList = async (notes) => {
-//   let jsonNotes = await notes.json();
-//   if (window.location.pathname === '/notes') {
-//     noteList.forEach((el) => (el.innerHTML = ''));
-//   }
+  const noteListItems = [];
 
-//   let noteListItems = [];
 
 //   // Returns HTML element with or without a delete button
 //   const createLi = (text, delBtn = true) => {

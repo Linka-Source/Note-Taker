@@ -35,35 +35,34 @@ const editNote = function(id) {
   })
 };
 
+const renderActiveNote = () => {
+  hide(saveNoteBtn);
 
+  if (activeNote.id) {
+    $noteTitle.attr("readonly", true);
+    $noteText.attr("readonly", true);
+    $noteTitle.val(activeNote.title);
+    $noteText.val(activeNote.text);
+  } else {
+    $noteTitle.attr("readonly", false);
+    $noteText.attr("readonly", false);
+    $noteTitle.val("");
+    $noteText.val("");
+  }
+};
 
-// const renderActiveNote = () => {
-//   hide(saveNoteBtn);
+const handleNoteSave = () => {
+  const newNote = {
+    title: noteTitle.value,
+    text: noteText.value,
+  };
+  saveNote(newNote).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
+};
 
-//   if (activeNote.id) {
-//     noteTitle.setAttribute('readonly', true);
-//     noteText.setAttribute('readonly', true);
-//     noteTitle.value = activeNote.title;
-//     noteText.value = activeNote.text;
-//   } else {
-//     noteTitle.value = '';
-//     noteText.value = '';
-//   }
-// };
-
-// const handleNoteSave = () => {
-//   const newNote = {
-//     title: noteTitle.value,
-//     text: noteText.value,
-//   };
-//   saveNote(newNote).then(() => {
-//     getAndRenderNotes();
-//     renderActiveNote();
-//   });
-// };
-
-// // Delete the clicked note
-// const handleNoteDelete = (e) => {
+const handleNoteDelete = (e) => {
 //   // prevents the click listener for the list from being called when the button inside of it is clicked
 //   e.stopPropagation();
 

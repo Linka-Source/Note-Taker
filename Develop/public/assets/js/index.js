@@ -6,6 +6,35 @@ const $noteList = $(".list-container .list-group");
 
 let activeNote = {};
 
+const getNotes = () => {
+  return $.ajax({
+    url: "/api/notes",
+    method: "GET",
+  });
+};
+
+const saveNote = (note) => {
+  return $.ajax({
+    url: "/api/notes",
+    data: note,
+    method: "POST",
+  });
+};
+
+const deleteNote = (id) => {
+  return $.ajax({
+    url: "api/notes/" + id,
+    method: "DELETE",
+  });
+};
+
+const editNote = function(id) {
+  return $.ajax({
+    url: "api/notes/" + id,
+    method: "PUT"
+  })
+};
+
 // if (window.location.pathname === '/notes') {
 //   noteTitle = document.querySelector('.note-title');
 //   noteText = document.querySelector('.note-textarea');

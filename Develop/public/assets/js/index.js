@@ -63,21 +63,21 @@ const handleNoteSave = () => {
 };
 
 const handleNoteDelete = (e) => {
-//   // prevents the click listener for the list from being called when the button inside of it is clicked
-//   e.stopPropagation();
+  e.stopPropagation();
 
-//   const note = e.target;
-//   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  const note = $(this).parent(".list-group-item").data();
 
-//   if (activeNote.id === noteId) {
-//     activeNote = {};
-//   }
+  if (activeNote.id === note.id) {
+    activeNote = {};
+  }
 
-//   deleteNote(noteId).then(() => {
-//     getAndRenderNotes();
-//     renderActiveNote();
-//   });
-// };
+  deleteNote(note.id).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
+};
+
+
 
 // // Sets the activeNote and displays it
 // const handleNoteView = (e) => {

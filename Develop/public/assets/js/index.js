@@ -104,15 +104,11 @@ const renderNoteList = async (notes) => {
 
 
 //   // Returns HTML element with or without a delete button
-//   const createLi = (text, delBtn = true) => {
-//     const liEl = document.createElement('li');
-//     liEl.classList.add('list-group-item');
+  const create$Li = (text, withdelBtn = true) => {
+    const $li = $("<li class='list-group-item'>");
+    const $span = $("<span>").text(text);
+    $li.append($span);
 
-//     const spanEl = document.createElement('span');
-//     spanEl.innerText = text;
-//     spanEl.addEventListener('click', handleNoteView);
-
-//     liEl.append(spanEl);
 
 //     if (delBtn) {
 //       const delBtnEl = document.createElement('i');

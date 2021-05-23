@@ -36,7 +36,7 @@ const editNote = function(id) {
 };
 
 const renderActiveNote = () => {
-  hide(saveNoteBtn);
+  $saveNoteBtn.hide();
 
   if (activeNote.id) {
     $noteTitle.attr("readonly", true);
@@ -85,7 +85,7 @@ const handleNoteView = (e) => {
 
 // // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
-  activeNote = {};
+  activeNote = $(this).data();
   renderActiveNote();
 };
 
@@ -102,46 +102,27 @@ const renderNoteList = async (notes) => {
 
   const noteListItems = [];
 
-
-//   // Returns HTML element with or without a delete button
   const create$Li = (text, withdelBtn = true) => {
     const $li = $("<li class='list-group-item'>");
     const $span = $("<span>").text(text);
     $li.append($span);
 
+    if (withDeleteButton) {
+      const $delBtn = $(
+        "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
+      );
+      $li.append($delBtn);
+    }
+    return $li;
+  };
 
-//     if (delBtn) {
-//       const delBtnEl = document.createElement('i');
-//       delBtnEl.classList.add(
-//         'fas',
-//         'fa-trash-alt',
-//         'float-right',
-//         'text-danger',
-//         'delete-note'
-//       );
-//       delBtnEl.addEventListener('click', handleNoteDelete);
+  if (notes.length === 0) {
+    noteListItems.push(create$li("No saved Notes", false));
+  }
 
-//       liEl.append(delBtnEl);
-//     }
+  notes.forEach((note) => {
+    const $li = create$li(note
 
-//     return liEl;
-//   };
-
-//   if (jsonNotes.length === 0) {
-//     noteListItems.push(createLi('No saved Notes', false));
-//   }
-
-//   jsonNotes.forEach((note) => {
-//     const li = createLi(note.title);
-//     li.dataset.note = JSON.stringify(note);
-
-//     noteListItems.push(li);
-//   });
-
-//   if (window.location.pathname === '/notes') {
-//     noteListItems.forEach((note) => noteList[0].append(note));
-//   }
-// };
 
 // // Gets notes from the db and renders them to the sidebar
 // const getAndRenderNotes = () => getNotes().then(renderNoteList);

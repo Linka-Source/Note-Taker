@@ -1,8 +1,7 @@
-const fs = require("fs");
-const express = require("express");
-const path = require("path");
-const app = express();
-const PORT = process.env.PORT || 3001;
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+var PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
@@ -24,16 +23,19 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
     fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
         if (err) console.log('readFile error');
-        let objectArray = JSON.parse(data);
+        let objectArray = JSON.parse(data);       
         objectArray.push(req.body);
+
         objectArray.forEach((item, i) => {
             item.id = i + 1;
         });
+
         let newNoteObj = JSON.stringify(objectArray);
         fs.writeFileSync(path.join(__dirname, '/db/db.json'), newNoteObj, (err, result) => {
             if (err) console.log('writefile error')
         });
     })
+
     res.sendStatus(200)
     res.send(req.body)
 })
@@ -42,17 +44,19 @@ app.delete('/api/notes/:id', (req, res) => {
 
 
     fs.readFile(path.join(__dirname, '/db/db.json'), (err, data) => {
-        let objectArray = JSON.parse(data);
+        let objectArray = JSON.parse(data);        
         objectArray.forEach((item) => {
             if (item.id == req.params.id) {
                 
                 objectArray.splice(req.params.id - 1, 1)
             }
+
             objectArray.forEach((item, i) => {
                 item.id = i + 1;
             });
 
         });
+        
         let newArray = JSON.stringify(objectArray);
         fs.writeFileSync(path.join(__dirname, '/db/db.json'), newArray, (err, result) => {
             if (err) console.log('writefile error')
@@ -68,4 +72,5 @@ app.get("/", function(req, res) {
     res.json(path.join(__dirname, "public/index.html"));
   });
 
-  app.listen(PORT, () => { console.log(`Listening on PORT ${PORT}`) })
+
+app.listen(PORT, () => { console.log(`Listening on PORT ${PORT}`) })
